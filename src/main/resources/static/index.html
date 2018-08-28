@@ -1,0 +1,94 @@
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shiina 短位址/短鏈接生成器</title>
+    <link rel="icon" href="favicon.ico">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.min.css?" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+    <script src="jquery-3.3.1.min.js"></script>
+
+</head>
+
+<body role="document">
+<header class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><strong>Shiina 短位址/短鏈接生成器</strong></a>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">生成短位址/短鏈接</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <span for="url">請輸入長位址</span>
+                        <input type="text" class="form-control" id="url" name="url" value="">
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">http://t.im/</div>
+                            <input type="text" class="form-control" id="keyword" name="keyword" placeholder="字母或數字"
+                                   value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span for="expiration">Expiration time (optional)</span>
+                        <input type="text" class="form-control" id="expiration" name="expiration"
+                               placeholder="僅數字，1 至 365 天" value="">
+                    </div>
+                    <div class="form-group">
+                        <span for="expiration">密码</span>
+                        <input type="text" class="form-control" id="password" name="expiration"
+                               placeholder="可不填" value="">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0px">
+                        <button type="submit" class="btn btn-default" id="send">縮短位址</button>
+                    </div>
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">生成短位址/短鏈接</h3>
+                        <div id="result"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#send").on("click", function () {
+        url = $("#url").val();
+        keyword = $("#keyword").val();
+        expiration = $("#expiration").val();
+        password = $("#password").val();
+        $.ajax({
+            type: "post",
+            url: "/create",
+            dataType: "json",
+            data: {
+                url: url,
+                keyword: keyword,
+                expiration: expiration,
+                password: password
+            },
+            success: function (data) {
+                if (data.status == 200) {
+                    console.log(data);
+                    $("#result").html("<a>"+data.shortUrl+"</a></br>"+"<image src=\"http://tool.oschina.net/action/qrcode/generate?data="+data.shortUrl+"&output=image%2Fjpeg&error=L&type=0&margin=0&size=4&1535461318512\"></image>\n");
+                }else{
+                    $("#result").html(data.success);
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

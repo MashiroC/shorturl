@@ -1,0 +1,67 @@
+<html lang="zh-CN" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shiina 短位址/短鏈接生成器</title>
+    <link rel="icon" href="favicon.ico">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet">
+    <link th:href="@{/css/theme.css}" rel="stylesheet">
+    <script th:src="@{/jquery-3.3.1.min.js}"></script>
+
+</head>
+
+<body role="document">
+<header class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><strong>請輸入密碼</strong></a>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">該鏈接是加密鏈接，請輸入密碼，或密碼錯誤</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <span for="expiration">密码</span>
+                        <input type="password" class="form-control" id="password" name="expiration"
+                               placeholder="" value="">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0px">
+                        <button type="submit" class="btn btn-default" id="send">Go!</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#send").on("click", function () {
+        href=window.location.href;
+        array=href.split('/');
+        url = array[array.length-1];
+        password=$("#password").val();
+        $.ajax({
+            type:"post",
+            url:"https://api.mashiroc.cn/u/"+url,
+            dataType:"json",
+            data:{
+                passwd:password
+            },
+            success:function (data) {
+                if(data.status===200){
+                    window.location.href=data.shortUrl;
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>
