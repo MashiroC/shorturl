@@ -10,4 +10,4 @@
 
 (因为自己的域名没有那么短只能让uri尽量短了)
 
-地址：https://api.mashiroc.cn/
+地址：https://hucang.shingdstar.com/
