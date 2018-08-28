@@ -31,7 +31,7 @@ public class AdminService {
         md = MessageDigest.getInstance("MD5");
     }
 
-    @Cacheable(value = "shortUrl", key = "'shortUrl'+#text")
+    @Cacheable(value = "shortUrl", key = "'shortUrl'+#text+#password")
     public synchronized ShortUrl creatShortUrl(String text, String keyword, int expiration, String password) {
         ShortUrl shortUrl = urlMapper.findShortUrlByOriginUrl(text);
         //如果找到了则直接返回找到的 没有进行下一步操作

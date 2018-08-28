@@ -34,7 +34,6 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <div class="input-group-addon">http://t.im/</div>
                             <input type="text" class="form-control" id="keyword" name="keyword" placeholder="字母或數字"
                                    value="">
                         </div>
@@ -46,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <span for="expiration">密码</span>
-                        <input type="text" class="form-control" id="password" name="expiration"
+                        <input type="text" class="form-control" id="passwd" name="expiration"
                                placeholder="可不填" value="">
                     </div>
                     <div class="form-group" style="margin-bottom: 0px">
@@ -68,7 +67,8 @@
         url = $("#url").val();
         keyword = $("#keyword").val();
         expiration = $("#expiration").val();
-        password = $("#password").val();
+        password = $("#passwd").val();
+        console.log(password);
         $.ajax({
             type: "post",
             url: "/create",
@@ -77,7 +77,8 @@
                 url: url,
                 keyword: keyword,
                 expiration: expiration,
-                password: password
+                password: password,
+                test:'test'
             },
             success: function (data) {
                 if (data.status == 200) {
