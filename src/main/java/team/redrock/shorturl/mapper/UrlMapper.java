@@ -13,7 +13,7 @@ import team.redrock.shorturl.been.ShortUrl;
 @Component
 public interface UrlMapper {
 
-    @Select("SELECT * FROM url WHERE short_code LIKE \"${code}%\" ORDER BY short_code DESC LIMIT 1")
+    @Select("SELECT * FROM url WHERE short_code = #{code}")
     ShortUrl findShortUrlByCode(@Param("code") String code);
 
     @Select("SELECT * FROM url WHERE origin_url=#{originUrl} AND password = ''")

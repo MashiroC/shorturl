@@ -3,7 +3,7 @@ package team.redrock.shorturl.been;
 import lombok.Data;
 
 /**
- * @Description
+ * @Description 响应实体类
  * @Author 余歌
  * @Date 2018/8/28
  **/

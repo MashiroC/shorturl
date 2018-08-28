@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @Description
+ * @Description 短链接
  * @Author 余歌
  * @Date 2018/8/28
  **/

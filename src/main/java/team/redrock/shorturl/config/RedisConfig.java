@@ -11,7 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * @Description
+ * @Description redis缓存配置
  * @Author 余歌
  * @Date 2018/8/28
  **/

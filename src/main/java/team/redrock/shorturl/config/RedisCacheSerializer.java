@@ -7,7 +7,7 @@ import org.springframework.data.redis.serializer.SerializationException;
 import java.nio.charset.Charset;
 
 /**
- * @Description
+ * @Description redis序列化
  * @Author 余歌
  * @Date 2018/8/28
  **/

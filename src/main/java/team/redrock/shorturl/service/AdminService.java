@@ -68,7 +68,12 @@ public class AdminService {
         }
         ShortUrl dbShortUrl = urlMapper.findShortUrlByCode(code);
         if (dbShortUrl != null) {
-            code = dbShortUrl.getShortCode() + (char) (ThreadLocalRandom.current().nextInt(97, 122));
+            for (int i = 0; i < 5; i++) {
+                code = dbShortUrl.getShortCode() + (char) (ThreadLocalRandom.current().nextInt(97, 122));
+                if(urlMapper.findShortUrlByCode(code)==null){
+                    break;
+                }
+            }
         }
         return new ShortUrl(text, code, password, expiration, String.valueOf(System.currentTimeMillis()));
     }
